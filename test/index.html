@@ -9,13 +9,51 @@
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
     </head>
     <body>
-        <ul>
-            <li class="gray">Gray</li>
-            <li class="invert">Invert</li>
-            <li class="opacity">Opacity</li>
-            <li class="box">Box Blur</li>
-        </ul>
-        <canvas id="canvas" width="256" height="256"></canvas>
+        <div id="viewport">
+            <ul id="menu">
+                <li>
+                    <details>
+                        <summary>灰度化 Gray</summary>
+                        <div>
+                            <button class="gray">OK</button>
+                        </div>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>反色 Invert</summary>
+                        <div>
+                            <button class="invert">OK</button>
+                        </div>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>透明度 Opacity</summary>
+                        <div>
+                            <output onforminput="this.value=opacity.value"></output>   
+                            <input type="range" name="opacity" value="255" min="0" max="255" step="1">
+                            <button class="opacity">OK</button>
+                        </div>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>均值模糊 Box Blur</summary>
+                        <div>
+                            <input type="range" name="box-blur-x" value="0" min="0" max="10" step="1">
+                            <input type="range" name="box-blur-y" value="0" min="0" max="10" step="1">
+                            <button class="blur.box">OK</button>
+                        </div>
+                    </details>
+                </li>
+                <li>
+                    <input id="refresh" type="button" value="Refresh">
+                </li>
+            </ul>
+            <canvas id="canvas" width="256" height="256"></canvas>
+        </div>
+        <script src="../../base/jquery-1.7.2.min.js"></script>
         <script src="../src/process.js"></script>
         <script src="scripts/main.js"></script>
     </body>

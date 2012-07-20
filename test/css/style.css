@@ -23,7 +23,21 @@ ul{
 ul{
     list-style: none;
 }
-ul li{
+#viewport{
+    vertical-align: top;
+}
+
+#viewport >*{
+    position: relative;
+    top: 0;
     display: inline-block;
 }
+
+#menu{
+    width: 200px;
+}
+#menu li{
+    text-align: right;
+}
+
 

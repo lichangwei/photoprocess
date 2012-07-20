@@ -2,14 +2,14 @@
 
 var process = window.process = {};
 
-process.gray = function(pixels){
+process.gray = function(pixels, width, height){
     for(var i = 0; i < pixels.length; i+=4){
         var gray = pixels[i]*0.299 + pixels[i+1]*0.587 + pixels[i+2]*0.114;
         pixels[i] = pixels[i+1] = pixels[i+2] = gray;
     }
 }
 
-process.invert = function(pixels){
+process.invert = function(pixels, width, height){
     for(var i = 0; i < pixels.length; i+=4){
         pixels[i] = 255 - pixels[i];
         pixels[i+1] = 255 - pixels[i+1];
@@ -17,9 +17,8 @@ process.invert = function(pixels){
     }
 }
 
-process.opacity = function(pixels, opacity){
+process.opacity = function(pixels, width, height, opacity){
     for(var i = 0; i < pixels.length; i+=4){
-        if(i===100)console.log(pixels[i+3])
         pixels[i+3] = opacity;
     }
 }
@@ -36,17 +35,13 @@ process.blur = {};
 process.blur.box = function(pixels, width, height, x, y){
     var num = (2*x+1) * (2*y+1);
     var copy = pixels.subarray(0);
-    
     for(var i = 0; i < height; i++){
         for(var j = 0; j < width; j++){
-            
             var box = [0, 0, 0];
-            for(var k = i-y; k < i+y; k++){
+            for(var k = i-y; k <= i+y; k++){
                 if(k<0 || k>=height) continue;
-                
-                for(var l = j-x; l < j+x; l++){
+                for(var l = j-x; l <= j+x; l++){
                     if(l<0 || l>=width) continue;
-                    
                     var index = (k*width + l) *4;
                     box[0] += copy[index];
                     box[1] += copy[index+1];
@@ -59,7 +54,6 @@ process.blur.box = function(pixels, width, height, x, y){
             pixels[index+2] = parseInt(box[2] / num);
         }
     }
-    console.log(pixels.subarray(240000))
 }
 
 
