@@ -34,7 +34,8 @@ process.dodge = function(pixels, mix){
 process.blur = {};
 process.blur.box = function(pixels, width, height, x, y){
     var num = (2*x+1) * (2*y+1);
-    var copy = pixels.subarray(0);
+    var copy = new Uint8ClampedArray(pixels.length);
+    copy.set(pixels, 0);
     for(var i = 0; i < height; i++){
         for(var j = 0; j < width; j++){
             var box = [0, 0, 0];

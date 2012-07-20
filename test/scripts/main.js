@@ -40,8 +40,7 @@ $('#refresh').click(function(){
         context.drawImage(img, 0, 0);
         ready = true;
     }
-});
-$('#refresh').click();
+}).click();
 
 (function(){
     var details = document.createElement('details');
