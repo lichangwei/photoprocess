@@ -10,9 +10,10 @@ $('ul').delegate('button[class]', 'click', function(e){
     if( !img ) return;
     
     var imageData = context.getImageData(0, 0, img.width, img.height);
-    var params = [imageData.data, imageData.width, imageData.width];
-    var inputs = $(this).prevAll('input');
+    var params = [imageData.data, imageData.width, imageData.height];
+    var inputs = $(this).parent().find('input');
     for(var i = 0; i < inputs.length; i++){
+        console.log(inputs[i].name)
         params.push( parseInt(inputs[i].value) );
     }
     

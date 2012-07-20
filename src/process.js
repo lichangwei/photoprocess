@@ -31,6 +31,27 @@ process.dodge = function(pixels, mix){
     }
 }
 
+process.mosaic = function(pixels, width, height, x, y, w, h){console.log([width, height, x, y, w, h].join(','))
+    var step = 9;
+    if(x > width || y > height || w < step || h < step) return;
+    w = Math.min(w, width - x);
+    h = Math.min(h, height - y);
+    for(var i = y; i < y+h; i+=step){
+        for(var j = x; j < x+w; j+=step){
+            var start = (i * width + j) * 4;
+            for(var k = i; k-i < step && k < y+h; k++){
+                for(var l = j; l-j < step && l < x+w; l++){
+                    var _start = (k * width + l) * 4;
+                    pixels[_start] = pixels[start];
+                    pixels[_start+1] = pixels[start+1];
+                    pixels[_start+2] = pixels[start+2];
+                    pixels[_start+3] = pixels[start+3];
+                }
+            }
+        }
+    }
+}
+
 process.blur = {};
 process.blur.box = function(pixels, width, height, x, y){
     var num = (2*x+1) * (2*y+1);
