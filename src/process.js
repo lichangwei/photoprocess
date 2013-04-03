@@ -7,7 +7,7 @@ process.gray = function(pixels, width, height){
         var gray = pixels[i]*0.299 + pixels[i+1]*0.587 + pixels[i+2]*0.114;
         pixels[i] = pixels[i+1] = pixels[i+2] = gray;
     }
-}
+};
 
 process.invert = function(pixels, width, height){
     for(var i = 0; i < pixels.length; i+=4){
@@ -15,13 +15,13 @@ process.invert = function(pixels, width, height){
         pixels[i+1] = 255 - pixels[i+1];
         pixels[i+2] = 255 - pixels[i+2];
     }
-}
+};
 
 process.opacity = function(pixels, width, height, opacity){
     for(var i = 0; i < pixels.length; i+=4){
         pixels[i+3] = opacity;
     }
-}
+};
 
 process.dodge = function(pixels, mix){
     for(var i = 0; i < pixels.length; i+=4){
@@ -29,9 +29,10 @@ process.dodge = function(pixels, mix){
         pixels[i+1] += pixels[i+1] * mix[i+1] / (255 - mix[i+1]);
         pixels[i+2] += pixels[i+2] * mix[i+2] / (255 - mix[i+2]);
     }
-}
+};
 
-process.mosaic = function(pixels, width, height, x, y, w, h){console.log([width, height, x, y, w, h].join(','))
+process.mosaic = function(pixels, width, height, x, y, w, h){
+    console.log([width, height, x, y, w, h].join(','));
     var step = 9;
     if(x > width || y > height || w < step || h < step) return;
     w = Math.min(w, width - x);
@@ -50,7 +51,7 @@ process.mosaic = function(pixels, width, height, x, y, w, h){console.log([width,
             }
         }
     }
-}
+};
 
 process.blur = {};
 process.blur.box = function(pixels, width, height, x, y){
@@ -76,7 +77,7 @@ process.blur.box = function(pixels, width, height, x, y){
             pixels[index+2] = parseInt(box[2] / num);
         }
     }
-}
+};
 
 
 })();
